@@ -34,6 +34,9 @@ class Result:
         _range = range(len(self.positions) - 1)
 
         cols = []
+        datatypes = ["#datatype","double", "double", "dateTime"]
+        cols.append(datatypes)
+        cols.append(result_dict.keys())
         for i in _range:
             row = [
                 result_dict["x"][i],
@@ -44,7 +47,6 @@ class Result:
 
         with open(filename, "w") as f:
             w = csv.writer(f)
-            w.writerow(result_dict.keys())
             w.writerows(cols)
 
     def __str__(self):

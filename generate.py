@@ -12,27 +12,6 @@ class Brownian(object):
         self.result = Result(settings)
         self.current_time = self.settings.start_time
 
-    def catch_path_is_outside(self, old_pos):
-
-        x = old_pos.x - normal(self.settings.normal_mean, self.settings.normal_std)
-        y = old_pos.y - normal(self.settings.normal_mean, self.settings.normal_std)
-        new_pos = geometry.Point(x, y)
-        if not self.settings.boundary.contains(new_pos):
-            x = old_pos.x + normal(self.settings.normal_mean, self.settings.normal_std)
-            y = old_pos.y - normal(self.settings.normal_mean, self.settings.normal_std)
-            new_pos = geometry.Point(x, y)
-        if not self.settings.boundary.contains(new_pos):
-            x = old_pos.x - normal(self.settings.normal_mean, self.settings.normal_std)
-            y = old_pos.y + normal(self.settings.normal_mean, self.settings.normal_std)
-            new_pos = geometry.Point(x, y)
-        if not self.settings.boundary.contains(new_pos):
-            self.catch_path_is_outside(old_pos)
-            raise Exception(
-                "Path is outside of boundary and could not change course correcytly. Tr again"
-            )
-
-        return new_pos
-
     def find_random_point_in_polygon(self):
         minx, miny, maxx, maxy = self.settings.boundary.bounds
         x = np.random.uniform(minx, maxx)

@@ -79,7 +79,6 @@ class Brownian(object):
         return True
 
     def step_in_time(self):
-        self.result.timestamps.append(self.result.settings.start_time)
         self.current_time += self.settings.timestep
         self.result.timestamps.append(self.current_time)
 
@@ -144,11 +143,12 @@ if __name__ == "__main__":
 
     settings = Settings(
         boundary=geometry.Polygon(polygon),
-        timestep=timedelta(hours=1),
+        timestep=timedelta(hours = 1),
         n_steps=500,
     )
     for i in range(10):
         b = Brownian(settings=settings)
         b.run()
+        b.display_results()
         b.result.to_csv(f"faketimeseriesdata{i}.csv")
-        b.plot_result_path()
+        #b.plot_result_path()

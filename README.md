@@ -1,7 +1,7 @@
 exportera först to_ken från influx
 https://eu-central-1-1.aws.cloud2.influxdata.com/orgs/4997dd7252ea0eff/new-user-setup/python
 
-``export NEKOT={din token}``
+``export NEKOT={din to_ken}``
 
 
 **settings.py**: Databashantering. Använd för att ta bort data / göra querys

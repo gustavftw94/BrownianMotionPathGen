@@ -7,6 +7,7 @@ import influxdb_client, os, time
 from influxdb_client import InfluxDBClient, Point, WritePrecision
 from influxdb_client.client.write_api import SYNCHRONOUS
 from alive_progress import alive_bar
+from generate import DEVICES
 
 @dataclass
 class Settings:
@@ -18,7 +19,7 @@ class Settings:
 
 class InfluxConnection():
     def __init__(self):
-        self.token = os.environ.get("INFLUXDB_TOKEN")
+        self.token = os.environ.get("NEKOT")
         self.org = "VestiTech Data"
         self.url = "https://eu-central-1-1.aws.cloud2.influxdata.com"
         self.client = influxdb_client.InfluxDBClient(url=self.url, token=self.token, org=self.org)
@@ -95,7 +96,8 @@ class Result:
             w = csv.writer(f)
             w.writerows(cols)
 
-    def write_result_to_influx(self,device_id: str):
+    def write_result_to_influx(self,i,device_id: str):
+        print(f"Uploading path for device {i + 1}/{len(DEVICES)}")
         with alive_bar(len(self.positions)) as bar:
             for pos, time in zip(self.positions,self.timestamps):
                 bar()

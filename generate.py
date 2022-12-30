@@ -149,9 +149,6 @@ if __name__ == "__main__":
     )
 
     for i,device_id in enumerate(DEVICES):
-        print(f"Uploading path for device {i+1}/{len(DEVICES)}")
         b = Brownian(settings=settings)
         b.run()
-        #b.display_results()
-        b.result.write_result_to_influx(device_id)
-        #b.plot_result_path()
+        b.result.write_result_to_influx(i,device_id)

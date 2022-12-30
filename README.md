@@ -1,0 +1,1 @@
+exportera först token från influx

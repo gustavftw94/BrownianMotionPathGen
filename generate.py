@@ -5,6 +5,7 @@ from datetime import timedelta
 from matplotlib import pyplot as plt
 import numpy as np
 
+DEVICES = ["R010T1F2236B72F0", "R010T1F2236B72CD"]
 
 class Brownian(object):
     def __init__(self, settings: Settings):
@@ -146,9 +147,11 @@ if __name__ == "__main__":
         timestep=timedelta(hours = 1),
         n_steps=500,
     )
-    for i in range(10):
+
+    for i,device_id in enumerate(DEVICES):
+        print(f"Uploading path for device {i+1}/{len(DEVICES)}")
         b = Brownian(settings=settings)
         b.run()
-        b.display_results()
-        b.result.to_csv(f"faketimeseriesdata{i}.csv")
+        #b.display_results()
+        b.result.write_result_to_influx(device_id)
         #b.plot_result_path()

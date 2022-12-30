@@ -4,3 +4,5 @@ pandas
 matplotlib
 fiona
 geopandas
+alive-progress
+influxdb-client
